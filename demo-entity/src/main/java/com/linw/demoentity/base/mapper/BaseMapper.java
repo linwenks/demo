@@ -4,8 +4,9 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.data.repository.CrudRepository;
 
-public interface BaseMapper<T, E> {
+public interface BaseMapper<T, E> extends CrudRepository {
 
 	public long countByExample(E example);
 
