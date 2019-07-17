@@ -64,7 +64,7 @@ public class Mybatis3PluginByInsertBatchSel extends BaseMybatis3Plugin {
 					
 					XmlElement setIf = new XmlElement("if");
 					setIf.addAttribute(new Attribute("test", parameterName + "[0]." + javaName + " != null"));
-					setIf.addElement(new TextElement(jdbcName + ","));
+					setIf.addElement(new TextElement("`" + jdbcName + "`,"));
 					
 					trim.addElement(setIf);
 				}

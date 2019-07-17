@@ -1,4 +1,4 @@
-package com.linw.demoentity.base.bo;
+package com.linw.demoentity.base.entity;
 
 import java.io.Serializable;
 
@@ -7,10 +7,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BaseBO implements Serializable {
+public class BaseEntity implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	private String orderBy;
 }

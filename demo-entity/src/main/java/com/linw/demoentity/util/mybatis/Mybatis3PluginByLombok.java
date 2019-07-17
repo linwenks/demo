@@ -28,16 +28,12 @@ public class Mybatis3PluginByLombok extends BaseMybatis3Plugin {
     public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
     	
         //添加domain的import
-    	topLevelClass.addImportedType(SuppressWarnings.class.getName());
         topLevelClass.addImportedType(Data.class.getName());
-        topLevelClass.addImportedType(EqualsAndHashCode.class.getName());
         topLevelClass.addImportedType(AllArgsConstructor.class.getName());
         topLevelClass.addImportedType(NoArgsConstructor.class.getName());
         
         //添加domain的注解
-        topLevelClass.addAnnotation("@SuppressWarnings(\"serial\")");
         topLevelClass.addAnnotation("@Data");
-        topLevelClass.addAnnotation("@EqualsAndHashCode(callSuper=false)");
         topLevelClass.addAnnotation("@AllArgsConstructor");
         topLevelClass.addAnnotation("@NoArgsConstructor");
         

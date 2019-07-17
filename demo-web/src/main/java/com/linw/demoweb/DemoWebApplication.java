@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.TimeZone;
 
-@MapperScan(basePackages = "com.linw.demoweb.mapper")
+@MapperScan(value = {"com.linw.demoweb.mapper", "com.linw.demoentity.mapper"})
 @SpringBootApplication
 public class DemoWebApplication {
 

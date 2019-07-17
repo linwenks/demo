@@ -62,11 +62,11 @@
 		</javaTypeResolver>
 
 
-		<javaModelGenerator targetPackage="com.linw.demoentity.bo" targetProject="demo-entity/src/main/java">
+		<javaModelGenerator targetPackage="com.linw.demoentity.entity" targetProject="demo-entity/src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
             <!--所有实体类继承BasePO类-->
-            <property name="rootClass" value="com.linw.demoentity.base.bo.BaseBO" />
+            <property name="rootClass" value="com.linw.demoentity.base.entity.BaseEntity" />
 		</javaModelGenerator>
 
 		<sqlMapGenerator targetPackage="com.linw.demoentity.mapper" targetProject="demo-entity/src/main/resources">

@@ -59,9 +59,9 @@ public class Mybatis3PluginByInsertBatch extends BaseMybatis3Plugin {
 					String jdbcName = column.getActualColumnName();
 					
 					if (iterator.hasNext()) {
-						insert.addElement(new TextElement(jdbcName + ","));
+						insert.addElement(new TextElement("`" + jdbcName + "`,"));
 					} else {
-						insert.addElement(new TextElement(jdbcName));
+						insert.addElement(new TextElement("`" + jdbcName + "`"));
 					}
 				}
 			}

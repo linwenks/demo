@@ -72,10 +72,10 @@ public class Mybatis3PluginByUpdatePkVer extends BaseMybatis3Plugin {
 					continue;
 				}
 				
-				update.addElement(new TextElement("  " + jdbcName + " = #{" + javaName + ",jdbcType=" + jdbcType + "},"));
+				update.addElement(new TextElement("  `" + jdbcName + "` = #{" + javaName + ",jdbcType=" + jdbcType + "},"));
 			}
 		}
-		update.addElement(new TextElement("  " + VERSION + " = " + VERSION + " + 1"));
+		update.addElement(new TextElement("  `" + VERSION + "` = `" + VERSION + "` + 1"));
 		
 		
     	String pkJdbcName = getPkJdbcName(introspectedTable);
@@ -83,8 +83,8 @@ public class Mybatis3PluginByUpdatePkVer extends BaseMybatis3Plugin {
     	String pkJdbcType = getPkJdbcType(introspectedTable);
     	
 		
-    	update.addElement(new TextElement("where " + pkJdbcName + " = #{" + pkJavaName + ",jdbcType=" + pkJdbcType + "}"));
-		update.addElement(new TextElement("and " + VERSION + " = #{" + verJavaName + ",jdbcType=" + verJdbcType + "}"));
+    	update.addElement(new TextElement("where `" + pkJdbcName + "` = #{" + pkJavaName + ",jdbcType=" + pkJdbcType + "}"));
+		update.addElement(new TextElement("and `" + VERSION + "` = #{" + verJavaName + ",jdbcType=" + verJdbcType + "}"));
 		
 		parentElement.addElement(update);
 

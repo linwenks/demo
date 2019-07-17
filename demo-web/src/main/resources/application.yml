@@ -19,8 +19,12 @@ spring:
         url: jdbc:mysql://192.168.7.124:3306/demo?serverTimezone=UTC&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true
         username: root
         password: root
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
 
 mybatis:
     mapper-locations:
-        classpath: com/linw/demo/mapper/*.xml
-    type-aliases-package: com.linw.demo.entity
+        classpath: com/linw/demoweb/mapper/*.xml,com/linw/demoentity/mapper/*.xml
+    type-aliases-package: com.linw.demoweb.entity,com.linw.demoentity.entity

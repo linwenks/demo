@@ -1,22 +1,11 @@
 package com.linw.demoentity.util.mybatis;
 
-import java.util.Properties;
-import java.util.Set;
-
-import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
-import org.mybatis.generator.api.dom.java.CompilationUnit;
 import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.InnerClass;
-import org.mybatis.generator.api.dom.java.InnerEnum;
-import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
-import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.internal.DefaultCommentGenerator;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -30,12 +19,6 @@ import javax.persistence.Table;
  *
  */
 public class Mybatis3AndJpaGenerator extends DefaultCommentGenerator {
-
-	@Override
-	public void addConfigurationProperties(Properties properties) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void addFieldComment(Field field, IntrospectedTable introspectedTable,
@@ -59,8 +42,7 @@ public class Mybatis3AndJpaGenerator extends DefaultCommentGenerator {
         topLevelClass.addJavaDocLine(" * " + introspectedTable.getRemarks());
         topLevelClass.addJavaDocLine(" * ");
         var tableName = introspectedTable.getFullyQualifiedTable().getIntrospectedTableName();
-        topLevelClass.addJavaDocLine(tableName);
-        topLevelClass.addJavaDocLine(" *");
+        topLevelClass.addJavaDocLine(" *" + tableName);
         topLevelClass.addJavaDocLine(" */");
 
 		topLevelClass.addImportedType(Entity.class.getName());

@@ -6,37 +6,37 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.repository.CrudRepository;
 
-public interface BaseMapper<T, E> extends CrudRepository {
+public interface BaseMapper<DO, C> extends CrudRepository<DO, Long> {
 
-	public long countByExample(E example);
+	long countByExample(C example);
 
-	public int deleteByExample(E example);
+	int deleteByExample(C example);
 
-	public int deleteByPrimaryKey(Long id);
+	int deleteByPrimaryKey(Long id);
 
-	public int insert(T record);
+	int insert(DO record);
 
-	public int insertSelective(T record);
+	int insertSelective(DO record);
 
-	public List<T> selectByExample(E example);
+	List<DO> selectByExample(C example);
 
-	public T selectByPrimaryKey(Long id);
+	DO selectByPrimaryKey(Long id);
 
-	public int updateByExampleSelective(@Param("record") T record, @Param("example") E example);
+	int updateByExampleSelective(@Param("record") DO record, @Param("example") C example);
 
-	public int updateByExample(@Param("record") T record, @Param("example") E example);
+	int updateByExample(@Param("record") DO record, @Param("example") C example);
 
-	public int updateByPrimaryKeySelective(T record);
+	int updateByPrimaryKeySelective(DO record);
 
-	public int updateByPrimaryKey(T record);
+	int updateByPrimaryKey(DO record);
 
-	public int insertBatch(@Param("recordColl") Collection<T> recordColl);
+	int insertBatch(@Param("recordColl") Collection<DO> recordColl);
 
-	public int insertBatchSel(@Param("recordColl") Collection<T> recordColl);
+	int insertBatchSel(@Param("recordColl") Collection<DO> recordColl);
 
-	public T selectByExampleForOne(E example);
+	DO selectByExampleForOne(C example);
 
-	public int updateByPrimaryKeySelectiveVer(T record);
+	int updateByPrimaryKeySelectiveVer(DO record);
 
-	public int updateByPrimaryKeyVer(T record);
+	int updateByPrimaryKeyVer(DO record);
 }
