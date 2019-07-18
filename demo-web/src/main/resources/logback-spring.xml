@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+	<springProfile name="default">
+		<property name="LOG_HOME" value="E://logs/demo" />
+	</springProfile>
+	<springProfile name="pro">
+		<property name="LOG_HOME" value="/opt/logs/demo" />
+	</springProfile>
+
+	<property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger.%M - %line > %msg%n" />
+	<property name="append" value="false" />
+	
+	<timestamp key="time_pattern" datePattern="yyyy-MM-dd HH:mm:ss" />
+	
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_HOME}/info</file>
+		<append>${append}</append> 
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/info.%d{yyyy-MM-dd}</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">   
+			<level>INFO</level>   
+			<onMatch>ACCEPT</onMatch>   
+			<onMismatch>DENY</onMismatch>   
+		</filter> 
+	</appender>
+	
+	<appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_HOME}/error</file>
+		<append>${append}</append> 
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/error.%d{yyyy-MM-dd}</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">   
+			<level>ERROR</level>   
+			<onMatch>ACCEPT</onMatch>   
+			<onMismatch>DENY</onMismatch>   
+		</filter> 
+	</appender>
+	
+	<appender name="ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_HOME}/all</file>
+		<append>${append}</append> 
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/all.%d{yyyy-MM-dd}</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- TRACE < DEBUG < INFO < WARN < ERROR -->
+	<springProfile name="default">
+		<root level="DEBUG">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="INFO" />
+			<appender-ref ref="ERROR" />
+			<appender-ref ref="ALL" />
+		</root>
+	</springProfile>
+	<springProfile name="pro">
+		<root level="INFO">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="INFO" />
+			<appender-ref ref="ERROR" />
+		</root>
+	</springProfile>
+	
+</configuration>

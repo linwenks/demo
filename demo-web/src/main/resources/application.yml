@@ -4,7 +4,6 @@ server:
     port: 80
     tomcat:
         uri-encoding: UTF-8
-
 spring:
     profiles:
         active: #spring.profiles.active#
@@ -23,7 +22,6 @@ spring:
         hibernate:
             ddl-auto: update
         show-sql: true
-
 mybatis:
     mapper-locations:
         classpath: com/linw/demoweb/mapper/*.xml,com/linw/demoentity/mapper/*.xml
