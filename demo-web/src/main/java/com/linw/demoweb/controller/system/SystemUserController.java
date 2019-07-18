@@ -42,7 +42,15 @@ public class SystemUserController {
         bo.setOrderBy(" id ");
         var list = systemUserService.selectList(null, bo);
         System.out.println(list);
-        return "login";
+        return "selectList";
+    }
+
+    @GetMapping("/selectOne")
+    public String selectOne() {
+        var bo = SystemUserBO.builder().id(1L).build();
+        var list = systemUserService.selectOne(bo);
+        System.out.println(list);
+        return "selectOne";
     }
 
 }

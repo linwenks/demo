@@ -75,7 +75,7 @@ public abstract class BaseServiceImpl<DO extends BaseEntity, BO, C> implements B
 		DO bo = null;
 		try {
 			C criteria = classCriteria.getDeclaredConstructor().newInstance();
-			Object criteriaDetail = classCriteria.getMethod("createCriteria", null).invoke(criteria, null);
+			Object criteriaDetail = classCriteria.getMethod("createCriteria", (Class<?>[]) null).invoke(criteria, (Object[]) null);
 			where(criteriaDetail, bean);
 			bo = mapper().selectByExampleForOne(criteria);
 		} catch (Exception e) {
@@ -89,7 +89,7 @@ public abstract class BaseServiceImpl<DO extends BaseEntity, BO, C> implements B
 		var count = 0L;
 		try {
 			C criteria = classCriteria.getDeclaredConstructor().newInstance();
-			Object criteriaDetail = classCriteria.getMethod("createCriteria", null).invoke(criteria, null);
+			Object criteriaDetail = classCriteria.getMethod("createCriteria", (Class<?>[]) null).invoke(criteria, (Object[]) null);
 			where(criteriaDetail, bean);
 			count = mapper().countByExample(criteria);
 		} catch (Exception e) {
@@ -113,7 +113,7 @@ public abstract class BaseServiceImpl<DO extends BaseEntity, BO, C> implements B
 			C criteria = classCriteria.getDeclaredConstructor().newInstance();
 			String orderByTmp = orderBy;
 			if (bo != null) {
-				Object orderBy = bo.getClass().getMethod("getOrderBy", null).invoke(bo, null);
+				Object orderBy = bo.getClass().getMethod("getOrderBy", (Class<?>[]) null).invoke(bo, (Object[]) null);
 				if (orderBy != null) {
 					orderByTmp = orderBy.toString();
 				}
@@ -123,7 +123,7 @@ public abstract class BaseServiceImpl<DO extends BaseEntity, BO, C> implements B
 				classCriteria.getMethod("setLimitStart", new Class[]{Integer.class}).invoke(criteria, limitStart);
 				classCriteria.getMethod("setLimitEnd", new Class[]{Integer.class}).invoke(criteria, limitEnd);
 			}
-			Object criteriaDetail = classCriteria.getMethod("createCriteria", null).invoke(criteria, null);
+			Object criteriaDetail = classCriteria.getMethod("createCriteria", (Class<?>[]) null).invoke(criteria, (Object[]) null);
 			where(criteriaDetail, bo);
 			listDO = mapper().selectByExample(criteria);
 		} catch (Exception e) {
@@ -140,7 +140,7 @@ public abstract class BaseServiceImpl<DO extends BaseEntity, BO, C> implements B
 		return listBO;
 	}
 	
-	private void where(Object criteria, BO bean) {
+	protected void where(Object criteria, BO bo) {
 	}
 	
 	public Object exe(String cmd, Object obj) {
@@ -263,7 +263,7 @@ public abstract class BaseServiceImpl<DO extends BaseEntity, BO, C> implements B
 		var row = 0;
 		try {
 			C criteria = classCriteria.getDeclaredConstructor().newInstance();
-			Object criteriaDetail = classCriteria.getMethod("createCriteria", null).invoke(criteria, null);
+			Object criteriaDetail = classCriteria.getMethod("createCriteria", (Class<?>[]) null).invoke(criteria, (Object[]) null);
 			where(criteriaDetail, bo);
 			row = mapper().deleteByExample(criteria);
 		} catch (Exception e) {
