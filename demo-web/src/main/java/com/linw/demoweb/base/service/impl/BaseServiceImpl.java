@@ -38,8 +38,8 @@ public abstract class BaseServiceImpl<DO extends BaseEntity, BO, C> implements B
 		classBO = (Class<BO>) types[1];
 		classCriteria = (Class<C>) types[2];
 	}
-	
-	public abstract BaseMapper<DO, C> mapper();
+
+	protected abstract BaseMapper<DO, C> mapper();
 	
 	private BO castBO(DO obj) {
 		if (obj != null) {

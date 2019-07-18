@@ -18,7 +18,7 @@ public class SystemUserServiceImpl extends BaseServiceImpl<SystemUser, SystemUse
     private SystemUserMapper systemUserMapper;
 
     @Override
-    public BaseMapper mapper() {
+    protected BaseMapper mapper() {
         return systemUserMapper;
     }
 
