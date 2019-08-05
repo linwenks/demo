@@ -29,3 +29,10 @@ build/
 
 ### VS Code ###
 .vscode/
+demo-entity/src/test/
+demo-test/src/main/resources/
+demo-web/src/main/java/com/linw/demoweb/base/controller/
+demo-web/src/main/java/com/linw/demoweb/controller/user/
+demo-web/src/main/java/com/linw/demoweb/mapper/
+demo-web/src/main/resources/static/
+demo-web/src/main/resources/templates/
