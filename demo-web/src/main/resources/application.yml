@@ -23,6 +23,5 @@ spring:
             ddl-auto: update
         show-sql: true
 mybatis:
-    mapper-locations:
-        classpath: com/linw/demoweb/mapper/*.xml,com/linw/demoentity/mapper/*.xml
+    mapper-locations: classpath:com/linw/demoweb/mapper/*.xml,com/linw/demoentity/mapper/*.xml
     type-aliases-package: com.linw.demoweb.entity,com.linw.demoentity.entity
