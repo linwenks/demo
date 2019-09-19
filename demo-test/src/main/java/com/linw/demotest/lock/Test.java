@@ -14,7 +14,7 @@ package com.linw.demotest.lock;
  * 7.偏向锁 / 轻量级锁 / 重量级锁
  * 8.自旋锁
  */
-public class Atest {
+public class Test {
 
     /*
         6 分段锁
