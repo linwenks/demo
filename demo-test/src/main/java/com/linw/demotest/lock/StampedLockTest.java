@@ -4,6 +4,9 @@ import java.util.concurrent.locks.LockSupport;
 import java.util.concurrent.locks.StampedLock;
 
 /**
+ *
+ * https://www.jianshu.com/p/21839c0d2835
+ *
  * ReentrantReadWriteLock 的增强版
  *
  * 乐观锁读 不可重入
