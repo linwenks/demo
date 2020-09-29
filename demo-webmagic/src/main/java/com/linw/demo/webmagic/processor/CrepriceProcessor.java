@@ -1,12 +1,16 @@
 package com.linw.demo.webmagic.processor;
 
 import com.google.common.collect.Lists;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.model.OOSpider;
 import us.codecraft.webmagic.pipeline.JsonFilePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 
+import javax.validation.constraints.Null;
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -14,8 +18,14 @@ import java.util.Map;
  */
 public class CrepriceProcessor implements PageProcessor {
 
+    private TemplateEngine templateEngine;
+
     // 部分一：抓取网站的相关配置，包括编码、抓取间隔、重试次数等
     private Site site = Site.me().setRetryTimes(3).setSleepTime(1000);
+
+    public CrepriceProcessor(@Null TemplateEngine templateEngine) {
+        this.templateEngine = templateEngine;
+    }
 
     @Override
     // process是定制爬虫逻辑的核心接口，在这里编写抽取逻辑
@@ -31,6 +41,12 @@ public class CrepriceProcessor implements PageProcessor {
             var title = titles.get(i % 6).get();
             list.add(Map.of(title, values.get(i).get()));
         }
+
+
+        Context context = new Context();
+        context.setVariables(emailContent.getContentMap());
+        var content = templateEngine.process("email" + File.separator +  template, context);
+
         page.putField("数据", list);
     }
 

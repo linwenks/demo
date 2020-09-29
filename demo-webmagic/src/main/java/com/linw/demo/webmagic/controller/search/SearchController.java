@@ -5,6 +5,7 @@ import com.linw.demo.webmagic.processor.CrepriceProcessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.TemplateEngine;
 import us.codecraft.webmagic.model.OOSpider;
 import us.codecraft.webmagic.pipeline.FilePageModelPipeline;
 import us.codecraft.webmagic.pipeline.FilePipeline;
@@ -24,6 +25,8 @@ import java.util.Map;
 @RequestMapping(value = "/webmagic/api/search/basis/")
 public class SearchController {
 
+	private TemplateEngine templateEngine;
+
 	@RequestMapping(value = "page")
 	public String page(Map<String, String> param, Model model, HttpServletRequest request, HttpServletResponse response) {
 
@@ -33,7 +36,7 @@ public class SearchController {
 	@RequestMapping(value = "submit")
 	public String search(SearchDtoSubmit dto, Model model, HttpServletRequest request, HttpServletResponse response) {
 		var url = dto.getUrl();
-		OOSpider.create(new CrepriceProcessor())
+		OOSpider.create(new CrepriceProcessor(templateEngine))
 				.addUrl(url)
 				.addPipeline(new FilePipeline("E:\\webmagic\\"))
 				//开启5个线程抓取
