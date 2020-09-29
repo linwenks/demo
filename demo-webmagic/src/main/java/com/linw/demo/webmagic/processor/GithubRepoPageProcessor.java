@@ -1,4 +1,4 @@
-package com.linw.demo.webmagic.action;
+package com.linw.demo.webmagic.processor;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
