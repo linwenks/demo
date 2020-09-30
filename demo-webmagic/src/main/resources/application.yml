@@ -26,4 +26,4 @@ spring:
         prefix: classpath:/thymeleaf/
 webmagic:
     download:
-        path: E://webmagic-web/download
+        path: E://demo-webmagic-web/download
