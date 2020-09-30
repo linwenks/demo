@@ -3,6 +3,7 @@ package com.linw.demo.webmagic.controller.search;
 import com.linw.demo.webmagic.dto.search.SearchDtoSubmit;
 import com.linw.demo.webmagic.processor.CrepriceProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,9 @@ public class SearchController {
 	@Autowired
 	private TemplateEngine templateEngine;
 
+	@Value("${webmagic.download.path}")
+	private String webmagicDownloadPath;
+
 	@RequestMapping(value = "page")
 	public String page(Map<String, String> param, Model model, HttpServletRequest request, HttpServletResponse response) {
 
@@ -40,7 +44,7 @@ public class SearchController {
 		var url = dto.getUrl();
 		OOSpider.create(new CrepriceProcessor(templateEngine))
 				.addUrl(url)
-				.addPipeline(new FilePipeline("E:\\webmagic\\"))
+				.addPipeline(new FilePipeline(webmagicDownloadPath))
 				//开启5个线程抓取
 				//.thread(1)
 				//启动爬虫

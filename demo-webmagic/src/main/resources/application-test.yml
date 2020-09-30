@@ -1,0 +1,9 @@
+#application.yml
+logging:
+    config: classpath:log4j2-test.xml
+spring:
+    profiles:
+        active: local
+webmagic:
+    download:
+        path: /home/webmagic-web/download
