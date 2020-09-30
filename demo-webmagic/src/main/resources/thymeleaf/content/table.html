@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<table border="1" style="border-collapse:collapse;">
+			<thead>
+				<tr>
+					<th th:each="title : ${titles}" th:text="${title}"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="values : ${list}">
+					<th th:each="value : ${values}" th:text="${value}"></th>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>

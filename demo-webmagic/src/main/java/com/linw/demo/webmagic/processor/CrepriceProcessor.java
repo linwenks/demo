@@ -8,15 +8,23 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.model.OOSpider;
 import us.codecraft.webmagic.pipeline.JsonFilePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.selector.Selectable;
 
 import javax.validation.constraints.Null;
 import java.io.File;
+import java.util.Collections;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * http://webmagic.io/
+ *
+ * https://www.cnblogs.com/justcooooode/p/7913365.html
+ *
+ *
  */
-public class CrepriceProcessor implements PageProcessor {
+public class  CrepriceProcessor implements PageProcessor {
 
     private TemplateEngine templateEngine;
 
@@ -33,28 +41,36 @@ public class CrepriceProcessor implements PageProcessor {
         // 部分二：定义如何抽取页面信息，并保存下来
 
         var titles = page.getHtml().xpath("//table[@id='px']/tbody[@class='ranklist']/tr[@style='display: none']/th/text()").nodes();
+        var titlesTemp = titles.stream().map(Selectable::get).collect(Collectors.toList());
 
         var values = page.getHtml().xpath("//table[@id='px']/tbody[@class='ranklist']/tr[@style='cursor: pointer;']/th/allText()").nodes();
+        var valuesTemp = values.stream().map(Selectable::get).collect(Collectors.toList());
 
-        var list = Lists.newArrayListWithExpectedSize(values.size() / titles.size());
-        for (var i=0; i<values.size(); i++) {
-            var title = titles.get(i % 6).get();
-            list.add(Map.of(title, values.get(i).get()));
+        var list = Lists.newArrayListWithExpectedSize(valuesTemp.size() / titlesTemp.size());
+        var detailList = Lists.newArrayListWithExpectedSize(titlesTemp.size());
+
+        for (var i=0; i<valuesTemp.size(); i++) {
+            detailList.add(values.get(i));
+            if (i % titlesTemp.size() == (titlesTemp.size() - 1)) {
+                list.add(detailList);
+                detailList = Lists.newArrayListWithExpectedSize(titlesTemp.size());
+            }
         }
 
+        var context = new Context();
+        context.setVariable("titles", titlesTemp);
+        context.setVariable("list", list);
+        var content = templateEngine.process("content/table", context);
 
-        Context context = new Context();
-        context.setVariables(emailContent.getContentMap());
-        var content = templateEngine.process("email" + File.separator +  template, context);
-
-        page.putField("数据", list);
+       // page.setRawText(content);
+        page.putField("", content);
     }
 
     @Override
     public Site getSite() {
         return site;
     }
-
+/*
     public static void main(String[] args) {
                 OOSpider.create(new CrepriceProcessor())
                 .addUrl("https://www.creprice.cn/ranklist/eyJkaSI6ImFsbCIsInBpIjoiY2hvbmdxaW5nIiwiY2kiOiJjcSIsInB0IjoxMSwidHkiOiJzYWxlIiwidW4iOiJkaXN0cmljdCIsImluIjoiUHJpY2UiLCJtbiI6IjIwMjAtMDgifQ==.html")
@@ -64,4 +80,5 @@ public class CrepriceProcessor implements PageProcessor {
                 //启动爬虫
                 .run();
     }
+    */
 }
