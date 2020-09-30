@@ -1,4 +1,6 @@
 #application.yml
+server:
+    port: 28080
 logging:
     config: classpath:log4j2-test.xml
 spring:
