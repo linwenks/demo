@@ -5,7 +5,7 @@ logging:
     config: classpath:log4j2-test.xml
 spring:
     profiles:
-        active: local
+        active: test
 webmagic:
     download:
         path: /home/demo-webmagic-web/download
